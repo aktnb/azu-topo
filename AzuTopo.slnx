@@ -1,0 +1,7 @@
+<Solution>
+  <Folder Name="/backend/">
+    <Project Path="backend/AzuTopo.Api/AzuTopo.Api.csproj" />
+    <Project Path="backend/AzuTopo.Core/AzuTopo.Core.csproj" />
+    <Project Path="backend/AzuTopo.Infrastructure.Azure/AzuTopo.Infrastructure.Azure.csproj" />
+  </Folder>
+</Solution>
