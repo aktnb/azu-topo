@@ -1,0 +1,76 @@
+.root {
+  width: 220px;
+  padding: 8px;
+  border: 1px solid #d0d7de;
+  border-left-width: 4px;
+  border-radius: 12px;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.rootActive {
+  border-left-color: #0078d4;
+}
+
+.rootDisabled {
+  border-left-color: #57606a;
+}
+
+.rootWarning {
+  border-left-color: #d97706;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.name {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  min-width: 0;
+}
+
+.icon {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+.queueInfo {
+  font-size: 11px;
+  color: #57606a;
+}
+
+.status {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+}
+
+.statusActive {
+  color: #0078d4;
+}
+
+.statusDisabled {
+  color: #57606a;
+}
+
+.statusWarning {
+  color: #d97706;
+}
+
+.statusDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  background: currentColor;
+}
