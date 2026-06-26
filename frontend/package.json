@@ -12,6 +12,7 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
+    "@dagrejs/dagre": "^3.0.0",
     "@xyflow/react": "^12.11.1",
     "react": "^19.2.7",
     "react-dom": "^19.2.7"
@@ -26,6 +27,7 @@
     "@storybook/addon-vitest": "^10.4.6",
     "@storybook/react-vite": "^10.4.6",
     "@types/babel__core": "^7.20.5",
+    "@types/dagre": "^0.7.54",
     "@types/node": "^24.13.2",
     "@types/react": "^19.2.17",
     "@types/react-dom": "^19.2.3",

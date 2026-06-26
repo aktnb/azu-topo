@@ -53,7 +53,7 @@ type Props = {
 };
 
 export function TopologyGraph({ graph }: Props) {
-  const nodes = toFlowNodes(graph.nodes);
+  const nodes = toFlowNodes(graph.nodes, graph.edges);
   const edges = toFlowEdges(graph.edges);
 
   return (
