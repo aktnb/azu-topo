@@ -11,6 +11,13 @@
   --shadow:
     rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
 
+  --color-status-enabled: #1e7e34;
+  --color-status-active: #0078d4;
+  --color-status-disabled: #d73a49;
+  --color-status-warning: #d97706;
+  --color-muted: #57606a;
+  --node-border: #d0d7de;
+
   --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
   --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
   --mono: ui-monospace, Consolas, monospace;

@@ -1,7 +1,7 @@
 .root {
   width: 220px;
   padding: 8px;
-  border: 1px solid #d0d7de;
+  border: 1px solid var(--node-border);
   border-left-width: 4px;
   border-radius: 12px;
   background: white;
@@ -11,15 +11,15 @@
 }
 
 .rootActive {
-  border-left-color: #0078d4;
+  border-left-color: var(--color-status-active);
 }
 
 .rootDisabled {
-  border-left-color: #57606a;
+  border-left-color: var(--color-status-disabled);
 }
 
 .rootWarning {
-  border-left-color: #d97706;
+  border-left-color: var(--color-status-warning);
 }
 
 .header {
@@ -45,7 +45,7 @@
 
 .queueInfo {
   font-size: 11px;
-  color: #57606a;
+  color: var(--color-muted);
 }
 
 .status {
@@ -56,15 +56,15 @@
 }
 
 .statusActive {
-  color: #0078d4;
+  color: var(--color-status-active);
 }
 
 .statusDisabled {
-  color: #57606a;
+  color: var(--color-status-disabled);
 }
 
 .statusWarning {
-  color: #d97706;
+  color: var(--color-status-warning);
 }
 
 .statusDot {
