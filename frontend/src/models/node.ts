@@ -19,21 +19,21 @@ export type TopologyNodeProperties =
 
 export type FunctionNodeProperties = {
   functionAppName: string;
-  functionName: string;
+  enabled: boolean;
 };
+
+export type ServiceBusQueueStatus = 'Active' | 'Disabled' | 'SendDisabled' | 'ReceiveDisabled';
 
 export type ServiceBusQueueNodeProperties = {
   namespace: string;
-  queueName: string;
+  status: ServiceBusQueueStatus;
 };
 
 export type ServiceBusTopicNodeProperties = {
   namespace: string;
-  topicName: string;
 };
 
 export type ServiceBusSubscriptionNodeProperties = {
   namespace: string;
   topicName: string;
-  subscriptionName: string;
 };

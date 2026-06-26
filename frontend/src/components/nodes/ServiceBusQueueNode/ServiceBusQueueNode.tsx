@@ -1,15 +1,14 @@
+import type { ServiceBusQueueStatus } from '../../../models/node';
 import styles from './ServiceBusQueueNode.module.scss';
-
-type QueueStatus = 'Active' | 'Disabled' | 'SendDisabled' | 'ReceiveDisabled';
 
 type Props = {
   name: string;
   namespace: string;
-  status: QueueStatus;
+  status: ServiceBusQueueStatus;
 };
 
 const statusConfig: Record<
-  QueueStatus,
+  ServiceBusQueueStatus,
   { rootClass: string; statusClass: string; label: string }
 > = {
   Active: { rootClass: styles.rootActive, statusClass: styles.statusActive, label: 'Active' },
