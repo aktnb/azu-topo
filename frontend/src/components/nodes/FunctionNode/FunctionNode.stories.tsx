@@ -7,6 +7,7 @@ const meta = {
   tags: ["ai-generated"],
   args: {
     name: "ProcessOrder",
+    functionAppName: "my-function-app",
     enabled: true,
   },
 } satisfies Meta<typeof FunctionNode>;
@@ -37,8 +38,7 @@ export const LongName: Story = {
 // Verifies that the SCSS module loaded: .root has background: white
 export const CssCheck: Story = {
   play: async ({ canvas }) => {
-    // "Function App" subtext is a direct child of .root — its parentElement is the root card
-    const root = canvas.getByText("Function App").parentElement!;
+    const root = canvas.getByText("Function", { exact: false }).parentElement!;
     await expect(getComputedStyle(root).backgroundColor).toBe(
       "rgb(255, 255, 255)"
     );

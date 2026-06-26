@@ -2,10 +2,11 @@ import styles from "./FunctionNode.module.scss";
 
 type Props = {
   name: string;
+  functionAppName: string;
   enabled: boolean;
 };
 
-export function FunctionNode({ name, enabled }: Props) {
+export function FunctionNode({ name, functionAppName, enabled }: Props) {
   return (
     <div className={`${styles.root} ${enabled ? styles.rootEnabled : styles.rootDisabled}`}>
       <div className={styles.header}>
@@ -16,7 +17,7 @@ export function FunctionNode({ name, enabled }: Props) {
         />
         <span className={styles.name}>{name}</span>
       </div>
-      <div className={styles.functionApp}>Function App</div>
+      <div className={styles.functionApp}>{functionAppName} / Function</div>
       <div className={`${styles.status} ${enabled ? styles.statusEnabled : styles.statusDisabled}`}>
         <span className={styles.statusDot} />
         {enabled ? "Enabled" : "Disabled"}
