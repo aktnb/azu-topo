@@ -10,4 +10,11 @@
     <Content Include="*.jsonc" Exclude="*.template.jsonc" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="Never" />
   </ItemGroup>
 
+  <Target Name="EnsureTopologyConnections" BeforeTargets="Build">
+    <Copy
+      SourceFiles="topology.connections.template.jsonc"
+      DestinationFiles="topology.connections.jsonc"
+      Condition="!Exists('topology.connections.jsonc')" />
+  </Target>
+
 </Project>

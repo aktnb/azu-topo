@@ -33,7 +33,6 @@ builder.Services.AddSingleton<ITopologyGraphProvider, JsoncTopologyGraphProvider
 
 var app = builder.Build();
 
-app.UseHttpsRedirection();
 app.UseCors();
 
 app.MapGet("/api/topology", async (
