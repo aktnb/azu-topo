@@ -30,3 +30,9 @@ coverage.*
 
 # Local topology definitions
 backend/AzuTopo.Api/topology.connections.jsonc
+
+# Function App publish output
+test/FunctionApp/publish/
+
+# Bicep compiled ARM templates
+test/infra/**/*.json
