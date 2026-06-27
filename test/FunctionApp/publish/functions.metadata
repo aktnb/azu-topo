@@ -1,0 +1,105 @@
+[
+  {
+    "name": "HandleOrder",
+    "scriptFile": "AzuTopo.TestFunctionApp.dll",
+    "entryPoint": "AzuTopo.TestFunctionApp.Functions.HandleOrderFunction.Run",
+    "language": "dotnet-isolated",
+    "properties": {
+      "IsCodeless": false
+    },
+    "bindings": [
+      {
+        "name": "message",
+        "direction": "In",
+        "type": "serviceBusTrigger",
+        "dataType": "String",
+        "queueName": "orders",
+        "connection": "ServiceBusConnectionString",
+        "cardinality": "One",
+        "properties": {}
+      }
+    ]
+  },
+  {
+    "name": "ManualReceive",
+    "scriptFile": "AzuTopo.TestFunctionApp.dll",
+    "entryPoint": "AzuTopo.TestFunctionApp.Functions.ManualReceiveFunction.Run",
+    "language": "dotnet-isolated",
+    "properties": {
+      "IsCodeless": false
+    },
+    "bindings": [
+      {
+        "name": "timer",
+        "direction": "In",
+        "type": "timerTrigger",
+        "schedule": "0 */1 * * * *",
+        "properties": {}
+      }
+    ]
+  },
+  {
+    "name": "ManualSend",
+    "scriptFile": "AzuTopo.TestFunctionApp.dll",
+    "entryPoint": "AzuTopo.TestFunctionApp.Functions.ManualSendFunction.Run",
+    "language": "dotnet-isolated",
+    "properties": {
+      "IsCodeless": false
+    },
+    "bindings": [
+      {
+        "name": "req",
+        "direction": "In",
+        "type": "httpTrigger",
+        "authLevel": "Function",
+        "methods": [
+          "post"
+        ],
+        "route": "notifications",
+        "properties": {}
+      },
+      {
+        "name": "$return",
+        "type": "http",
+        "direction": "Out"
+      }
+    ]
+  },
+  {
+    "name": "ProcessOrder",
+    "scriptFile": "AzuTopo.TestFunctionApp.dll",
+    "entryPoint": "AzuTopo.TestFunctionApp.Functions.ProcessOrderFunction.Run",
+    "language": "dotnet-isolated",
+    "properties": {
+      "IsCodeless": false
+    },
+    "bindings": [
+      {
+        "name": "req",
+        "direction": "In",
+        "type": "httpTrigger",
+        "authLevel": "Function",
+        "methods": [
+          "post"
+        ],
+        "route": "orders",
+        "properties": {}
+      },
+      {
+        "name": "QueueMessage",
+        "direction": "Out",
+        "type": "serviceBus",
+        "dataType": "String",
+        "queueOrTopicName": "orders",
+        "entityType": "Queue",
+        "connection": "ServiceBusConnectionString",
+        "properties": {}
+      },
+      {
+        "name": "HttpResponse",
+        "type": "http",
+        "direction": "Out"
+      }
+    ]
+  }
+]
