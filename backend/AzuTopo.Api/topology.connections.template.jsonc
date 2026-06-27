@@ -1,0 +1,39 @@
+{
+  // Copy this file to topology.connections.jsonc and edit it for your local Azure topology.
+  // Logical resource IDs stay stable across environments.
+  "resources": [
+    {
+      "id": "fn-process-order",
+      "type": "function",
+      "name": "ProcessOrder",
+      "functionAppName": "order-processor-${AppSuffix}",
+      "enabled": true
+    },
+    {
+      "id": "queue-orders",
+      "type": "serviceBusQueue",
+      "name": "orders-${AppSuffix}-queue",
+      "namespace": "my-servicebus-${AppSuffix}",
+      "status": "Active"
+    },
+    {
+      "id": "fn-handle-order",
+      "type": "function",
+      "name": "HandleOrder",
+      "functionAppName": "order-processor-${AppSuffix}",
+      "enabled": true
+    }
+  ],
+  "connections": [
+    {
+      "source": "fn-process-order",
+      "target": "queue-orders",
+      "type": "output"
+    },
+    {
+      "source": "queue-orders",
+      "target": "fn-handle-order",
+      "type": "trigger"
+    }
+  ]
+}

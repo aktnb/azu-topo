@@ -27,3 +27,6 @@ coverage.*
 
 # Logs
 *.log
+
+# Local topology definitions
+backend/AzuTopo.Api/topology.connections.jsonc
