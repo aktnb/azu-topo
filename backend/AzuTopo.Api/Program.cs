@@ -1,9 +1,16 @@
+using Azure.Identity;
+using Azure.ResourceManager;
 using AzuTopo.Api.Topology.Configuration;
 using AzuTopo.Api.Topology.Exceptions;
 using AzuTopo.Api.Topology.Models;
 using AzuTopo.Api.Topology.Services;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Configuration.AddJsonFile(
+    "appsettings.Development.user.json",
+    optional: true,
+    reloadOnChange: false);
 
 builder.Services.AddCors(options =>
 {
@@ -29,7 +36,21 @@ builder.Services.AddSingleton(new TopologyProviderOptions
 {
     ConnectionsPath = Path.GetFullPath(defaultConnectionsPath),
 });
-builder.Services.AddSingleton<ITopologyGraphProvider, JsoncTopologyGraphProvider>();
+
+var provider = builder.Configuration["Topology:Provider"] ?? "jsonc";
+switch (provider)
+{
+    case "azure":
+        builder.Services.AddSingleton(_ => new ArmClient(new DefaultAzureCredential()));
+        builder.Services.AddSingleton<ITopologyGraphProvider, AzureTopologyGraphProvider>();
+        break;
+    case "jsonc":
+        builder.Services.AddSingleton<ITopologyGraphProvider, JsoncTopologyGraphProvider>();
+        break;
+    default:
+        throw new InvalidOperationException(
+            $"Topology:Provider \"{provider}\" is not supported.");
+}
 
 var app = builder.Build();
 

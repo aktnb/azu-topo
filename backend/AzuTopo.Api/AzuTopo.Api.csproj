@@ -10,11 +10,25 @@
     <Content Include="*.jsonc" Exclude="*.template.jsonc" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="Never" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Azure.Identity" Version="1.21.0" />
+    <PackageReference Include="Azure.ResourceManager.AppService" Version="1.5.0" />
+    <PackageReference Include="Azure.ResourceManager.ServiceBus" Version="1.1.0" />
+  </ItemGroup>
+
   <Target Name="EnsureTopologyConnections" BeforeTargets="Build">
     <Copy
       SourceFiles="topology.connections.template.jsonc"
       DestinationFiles="topology.connections.jsonc"
       Condition="!Exists('topology.connections.jsonc')" />
+  </Target>
+
+  <Target Name="EnsureUserSettings" BeforeTargets="Build"
+          Condition="'$(DOTNET_RUNNING_IN_CONTAINER)' != 'true'">
+    <Copy
+      SourceFiles="appsettings.Development.user.template.json"
+      DestinationFiles="appsettings.Development.user.json"
+      Condition="!Exists('appsettings.Development.user.json')" />
   </Target>
 
 </Project>

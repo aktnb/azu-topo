@@ -39,3 +39,9 @@ public static class ServiceBusQueueStatuses
         ReceiveDisabled,
     };
 }
+
+public static class TopologyWarningCodes
+{
+    public const string ConnectionNotFound = "connectionNotFound";
+    public const string UnsupportedBinding = "unsupportedBinding";
+}

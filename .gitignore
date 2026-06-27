@@ -30,6 +30,7 @@ coverage.*
 
 # Local topology definitions
 backend/AzuTopo.Api/topology.connections.jsonc
+backend/AzuTopo.Api/appsettings.Development.user.json
 
 # Function App publish output
 test/FunctionApp/publish/

@@ -1,38 +1,29 @@
 {
-  // Copy this file to topology.connections.jsonc and edit it for your local Azure topology.
-  // Logical resource IDs stay stable across environments.
-  "resources": [
-    {
-      "id": "fn-process-order",
-      "type": "function",
-      "name": "ProcessOrder",
-      "functionAppName": "order-processor-${AppSuffix}",
-      "enabled": true
-    },
-    {
-      "id": "queue-orders",
-      "type": "serviceBusQueue",
-      "name": "orders-${AppSuffix}-queue",
-      "namespace": "my-servicebus-${AppSuffix}",
-      "status": "Active"
-    },
-    {
-      "id": "fn-handle-order",
-      "type": "function",
-      "name": "HandleOrder",
-      "functionAppName": "order-processor-${AppSuffix}",
-      "enabled": true
-    }
-  ],
+  // SDK 直接接続（ServiceBusClient.CreateSender / CreateReceiver 等）を
+  // ここに追記してください。Azure Provider が自動検知できない接続を補完します。
+  //
+  // Node ID のフォーマット（すべて小文字）:
+  //   Function:          fn-{functionAppName}-{functionName}
+  //   Service Bus Queue: queue-{namespaceName}-{queueName}
+  //
+  // ${AppSuffix} は appsettings の Topology:Environments:{env}:AppSuffix で解決されます。
   "connections": [
     {
-      "source": "fn-process-order",
-      "target": "queue-orders",
+      // HandleOrder → notifications (SDK: serviceBusClient.CreateSender("notifications"))
+      "source": "fn-order-processor-${AppSuffix}-handleorder",
+      "target": "queue-my-servicebus-${AppSuffix}-notifications",
       "type": "output"
     },
     {
-      "source": "queue-orders",
-      "target": "fn-handle-order",
+      // ManualSend → notifications (SDK: serviceBusClient.CreateSender("notifications"))
+      "source": "fn-order-processor-${AppSuffix}-manualsend",
+      "target": "queue-my-servicebus-${AppSuffix}-notifications",
+      "type": "output"
+    },
+    {
+      // ManualReceive ← notifications (SDK: serviceBusClient.CreateReceiver("notifications"))
+      "source": "queue-my-servicebus-${AppSuffix}-notifications",
+      "target": "fn-order-processor-${AppSuffix}-manualreceive",
       "type": "trigger"
     }
   ]
